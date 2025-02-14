@@ -19,7 +19,6 @@ export class DoctorsController {
   async getPatients(@User() user) {
     const doctorId = user._id as string;
     return this.doctorsService.getPatientsByDoctor(doctorId);
-
   }
 
   @Get(':id')

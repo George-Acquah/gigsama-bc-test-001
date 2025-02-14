@@ -28,7 +28,7 @@ export class PatientsService {
   async remove(id: string): Promise<void> {
     await this.patientModel.findByIdAndDelete(id).exec();
   }
-  
+
   async assignDoctor(patientId: string, doctorId: string) {
     const doctor = await this.doctorService.findById(doctorId);
     const patient = await this.patientModel.findById(patientId);

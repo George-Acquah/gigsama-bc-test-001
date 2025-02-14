@@ -28,14 +28,18 @@ export class DoctorsService {
   }
 
   async getPatientsByDoctor(doctorId: string) {
-    const doctor = await this.doctorModel.findById(doctorId).populate('patients');
+    const doctor = await this.doctorModel
+      .findById(doctorId)
+      .populate('patients');
     if (!doctor) {
       throw new NotFoundException('Doctor not found');
     }
     return doctor.patients;
   }
 
-async listAvailableDoctors() {
-    return this.doctorModel.find().select('name specialization experienceYears');
+  async listAvailableDoctors() {
+    return this.doctorModel
+      .find()
+      .select('name specialization experienceYears');
   }
 }

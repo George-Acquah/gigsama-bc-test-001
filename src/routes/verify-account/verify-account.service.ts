@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { Injectable } from '@nestjs/common/decorators/core';
+import { InjectModel } from '@nestjs/mongoose/dist/common';
 import { randomBytes } from 'crypto';
 import { Model } from 'mongoose';
 import { _IDbAccountVerification } from 'src/shared/interfaces/users.interface';

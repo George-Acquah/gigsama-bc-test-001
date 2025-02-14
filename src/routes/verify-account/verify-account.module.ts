@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module } from '@nestjs/common/decorators/modules';
 import { MongooseModule } from '@nestjs/mongoose';
 import {
   AccountVerification,

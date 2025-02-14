@@ -5,10 +5,12 @@ import { Patient } from 'src/shared/schemas/patient.schema';
 import { User } from 'src/shared/decorators/user.decorator';
 import { DoctorsService } from '../doctors/doctors.service';
 
-
 @Controller('patients')
 export class PatientsController {
-  constructor(private readonly patientsService: PatientsService, private readonly doctorsService: DoctorsService) {}
+  constructor(
+    private readonly patientsService: PatientsService,
+    private readonly doctorsService: DoctorsService
+  ) {}
 
   @Get()
   findAll(): Promise<Patient[]> {

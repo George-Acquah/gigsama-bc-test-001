@@ -1,12 +1,7 @@
-import {
-  Controller,
-  HttpStatus,
-  MaxFileSizeValidator,
-  ParseFilePipe,
-  Post,
-  UploadedFiles,
-  UseGuards
-} from '@nestjs/common';
+import { HttpStatus } from '@nestjs/common';
+import { Controller, UseGuards } from '@nestjs/common/decorators/core';
+import { Post, UploadedFiles } from '@nestjs/common/decorators/http';
+import { ParseFilePipe, MaxFileSizeValidator } from '@nestjs/common/pipes/file';
 import { UsersService } from './users.service';
 import { User } from 'src/shared/decorators/user.decorator';
 import { JwtAuthGuard } from 'src/shared/guards/Jwt.guard';
