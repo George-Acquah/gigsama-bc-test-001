@@ -5,10 +5,12 @@ import { PatientsController } from './patients.controller';
 import { Patient, PatientSchema } from 'src/shared/schemas/patient.schema';
 import { DoctorsModule } from '../doctors/doctors.module';
 
-
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Patient.name, schema: PatientSchema }]), DoctorsModule],
+  imports: [
+    MongooseModule.forFeature([{ name: Patient.name, schema: PatientSchema }]),
+    DoctorsModule
+  ],
   providers: [PatientsService],
-  controllers: [PatientsController],
+  controllers: [PatientsController]
 })
 export class PatientsModule {}

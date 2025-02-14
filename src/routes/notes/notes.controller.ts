@@ -10,14 +10,13 @@ export class NotesController {
 
   @Post('submit')
   async submitNote(
-    @User() user,
-    @Body() body: { patientId: string; encryptedNote: string },
+    @User('_id') doctorId: string,
+    @Body() body: { patientId: string; encryptedNote: string }
   ) {
-    const doctorId = user._id as string;
     return this.notesService.submitDoctorNote({
       doctorId,
       patientId: body.patientId,
-      encryptedNote: body.encryptedNote,
+      encryptedNote: body.encryptedNote
     });
   }
 
@@ -27,7 +26,7 @@ export class NotesController {
   }
 
   @Post('complete-step/:stepId')
-async completeStep(@Param('stepId') stepId: string) {
-  return this.notesService.completeActionStep(stepId);
-}
+  async completeStep(@Param('stepId') stepId: string) {
+    return this.notesService.completeActionStep(stepId);
+  }
 }

@@ -42,15 +42,15 @@ export class AuthController {
       const { _id, ...user } = result;
       console.log(_id);
 
-      const verificationToken =
-        await this.accountVerificationService.createVerificationToken(
-          user.email
-        );
-      await this.mailService.sendAccountVerificationToken(
-        user.email,
-        'some-user-name',
-        verificationToken
-      );
+      // const verificationToken =
+      //   await this.accountVerificationService.createVerificationToken(
+      //     user.email
+      //   );
+      // await this.mailService.sendAccountVerificationToken(
+      //   user.email,
+      //   'some-user-name',
+      //   verificationToken
+      // );
 
       return new ApiResponse(
         200,

@@ -1,10 +1,7 @@
-import {
-  ConflictException,
-  NotFoundException
-} from '@nestjs/common';
+import { ConflictException, NotFoundException } from '@nestjs/common';
 import { Injectable } from '@nestjs/common/decorators/core';
-import { InjectModel } from '@nestjs/mongoose';
-import mongoose, { Model } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose/dist/common';
+import { Model } from 'mongoose';
 import { CreateUserDto } from 'src/shared/dtos/users/create-users.dto';
 import { sanitizeUserFn } from 'src/shared/helpers/users.sanitizers';
 import {
