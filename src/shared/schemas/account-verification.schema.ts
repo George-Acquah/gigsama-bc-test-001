@@ -1,5 +1,6 @@
 import { HydratedDocument } from 'mongoose';
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema } from '@nestjs/mongoose/dist/decorators';
+import { SchemaFactory } from '@nestjs/mongoose/dist/factories';
 
 export type AccountVerificationDocument = HydratedDocument<AccountVerification>;
 

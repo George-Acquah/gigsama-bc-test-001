@@ -1,9 +1,5 @@
-import {
-  MiddlewareConsumer,
-  Module,
-  NestModule,
-  RequestMethod
-} from '@nestjs/common';
+import { MiddlewareConsumer, NestModule, RequestMethod } from '@nestjs/common';
+import { Module } from '@nestjs/common/decorators/modules';
 import { UsersService } from './users.service';
 import { UsersController } from './users.controller';
 import { AggregationService } from 'src/shared/services/aggregation.service';

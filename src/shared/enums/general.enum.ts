@@ -4,4 +4,8 @@ enum SORT {
   ASCENDING = 'ascending'
 }
 
+export enum UserRole {
+  PATIENT = 'patient',
+  DOCTOR = 'doctor'
+}
 export { SORT };

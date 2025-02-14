@@ -1,6 +1,9 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema } from '@nestjs/mongoose/dist/decorators';
+import { SchemaFactory } from '@nestjs/mongoose/dist/factories';
 import { HydratedDocument, Schema as MongooseSchema } from 'mongoose';
 import { User } from './user.schema';
+import { Doctor } from './doctor.schema';
+import { Patient } from './patient.schema';
 
 export type UserImageDocument = HydratedDocument<UserImage>;
 
@@ -33,6 +36,20 @@ export class UserImage {
     required: true
   })
   user: User;
+
+  @Prop({
+    type: MongooseSchema.Types.ObjectId,
+    ref: 'Doctor',
+    required: true
+  })
+  doctor: Doctor;
+
+  @Prop({
+    type: MongooseSchema.Types.ObjectId,
+    ref: 'Patient',
+    required: true
+  })
+  patient: Patient;
 }
 
 export const UserImageSchema = SchemaFactory.createForClass(UserImage);

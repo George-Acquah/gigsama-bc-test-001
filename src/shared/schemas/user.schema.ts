@@ -1,6 +1,8 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema } from '@nestjs/mongoose/dist/decorators';
+import { SchemaFactory } from '@nestjs/mongoose/dist/factories';
 import { HydratedDocument, Document } from 'mongoose';
 import * as bcrypt from 'bcrypt';
+import { UserRole } from '../enums/general.enum';
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -21,6 +23,9 @@ export class User extends Document {
 
   @Prop({ type: Date })
   createdAt: Date;
+
+  @Prop({ type: String, enum: UserRole, required: true })
+  role: UserRole;
 
   @Prop({ type: Date })
   updatedAt: Date;
