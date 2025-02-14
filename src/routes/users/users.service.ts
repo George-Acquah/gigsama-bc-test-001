@@ -1,10 +1,10 @@
 import {
   ConflictException,
-  Injectable,
   NotFoundException
 } from '@nestjs/common';
+import { Injectable } from '@nestjs/common/decorators/core';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import { CreateUserDto } from 'src/shared/dtos/users/create-users.dto';
 import { sanitizeUserFn } from 'src/shared/helpers/users.sanitizers';
 import {
@@ -30,6 +30,20 @@ export class UsersService {
 
       if (!user) {
         throw new NotFoundException(`User with email ${email} does not exist.`);
+      } else {
+        return user;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  async findById(id: string): Promise<_IDbUser> {
+    try {
+      const user = await this.userModel.findById(id).select('-password');
+
+      if (!user) {
+        throw new NotFoundException(`User with id ${id} does not exist.`);
       } else {
         return user;
       }

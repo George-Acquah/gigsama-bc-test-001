@@ -1,5 +1,6 @@
 import { Document } from 'mongoose';
 import { _IDbUserImage, _IUserImage } from './images.interface';
+import { UserRole } from '../enums/general.enum';
 
 interface _IDbProfile extends Document {
   first_name: string | null;
@@ -17,6 +18,7 @@ interface _IDbUser extends Document {
   readonly password: string;
   profile: _IDbProfile;
   user_image: _IDbUserImage;
+  role: UserRole;
   createdAt: string;
   updatedAt: string;
   isVerified: boolean;
@@ -38,12 +40,14 @@ interface _ISanitizedUser {
   _id: string;
   email: string;
   profile: _ISanitizedProfile;
+  role: UserRole;
   user_image: _IUserImage;
 }
 
 export interface _ISafeUser {
   _id: string;
   email: string;
+  role: UserRole;
   isVerified: boolean;
 }
 

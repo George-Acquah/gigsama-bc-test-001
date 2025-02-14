@@ -1,9 +1,4 @@
-import {
-  BadRequestException,
-  Injectable,
-  Logger,
-  NotFoundException
-} from '@nestjs/common';
+import { BadRequestException, Logger, NotFoundException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import {
   _IPayload,
@@ -16,6 +11,7 @@ import { sanitizeLoginUserFn } from 'src/shared/helpers/users.sanitizers';
 import { LoginUserDto } from 'src/shared/dtos/users/login-users.dtos';
 import { getExpirationTime } from 'src/shared/utils/users.utils';
 import { AccountVerificationService } from '../verify-account/verify-account.service';
+import { Injectable } from '@nestjs/common/decorators/core';
 
 @Injectable()
 export class AuthService {
@@ -198,6 +194,11 @@ export class AuthService {
   async verifyUser(payload: _IPayload) {
     const user = await this.findByPayload(payload);
 
+    return sanitizeLoginUserFn(user);
+  }
+
+  async getProfile(email: string) {
+    const user = await this.userService.findUser(email);
     return sanitizeLoginUserFn(user);
   }
 }

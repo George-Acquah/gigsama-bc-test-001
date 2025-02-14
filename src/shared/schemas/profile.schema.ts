@@ -1,5 +1,6 @@
 import { HydratedDocument, Schema as MongooseSchema } from 'mongoose';
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Prop, Schema } from '@nestjs/mongoose/dist/decorators';
+import { SchemaFactory } from '@nestjs/mongoose/dist/factories';
 import { User } from './user.schema';
 import { UserConstraints } from '../enums/users.enum';
 

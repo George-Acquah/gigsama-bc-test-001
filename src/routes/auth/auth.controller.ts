@@ -1,22 +1,21 @@
-import {
-  Body,
-  Controller,
-  Post,
-  Query,
-  UseGuards,
-  UsePipes,
-  ValidationPipe
-} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { MailService } from '../mail/mail.service';
 import { CreateUserDto } from 'src/shared/dtos/users/create-users.dto';
 import { LoginUserDto } from 'src/shared/dtos/users/login-users.dtos';
 import { RefreshJwtAuthGuard } from 'src/shared/guards/refreshJwt.guard';
 import { ApiResponse } from 'src/shared/res/api.response';
-import { User } from 'src/shared/decorators/user.decorator';
 import { UsersService } from '../users/users.service';
 import { AccountVerificationService } from '../verify-account/verify-account.service';
 import { VerifyAccountQueryDto } from 'src/shared/dtos/users/verify-account.dto';
+import { JwtAuthGuard } from 'src/shared/guards/Jwt.guard';
+import { Body, Get, Post, Query } from '@nestjs/common/decorators/http';
+import {
+  Controller,
+  UsePipes,
+  UseGuards
+} from '@nestjs/common/decorators/core';
+import { ValidationPipe } from '@nestjs/common/pipes';
+import { User } from 'src/shared/decorators/user.decorator';
 // import { LocalJwtAuthGuard } from 'src/shared/guards/local-jwt.guard';
 
 @Controller('auth')
@@ -40,7 +39,6 @@ export class AuthController {
         );
       }
 
-      //We destructure _id and send whatever remains in the result as owner
       const { _id, ...user } = result;
       console.log(_id);
 
@@ -92,7 +90,7 @@ export class AuthController {
   }
 
   @Post('account/verify')
-  @UsePipes(new ValidationPipe({ transform: true, whitelist: true }))
+  @UsePipes(new ValidationPipe({ transform: true }))
   async verifyAccount(@Query() query: VerifyAccountQueryDto) {
     try {
       const { code, email } = query; // Destructure the validated query parameters
@@ -122,5 +120,11 @@ export class AuthController {
     } catch (error) {
       return new ApiResponse(400, error.message ?? "Couldn't refresh", {});
     }
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  async getProfile(@User() user) {
+    return this.authService.getProfile(user.email);
   }
 }
